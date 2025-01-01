@@ -12,7 +12,11 @@ const port = 4000
 
 // middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "*", // Adjust this for production
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }));
 app.use('/uploads', express.static('uploads'));
 
 
