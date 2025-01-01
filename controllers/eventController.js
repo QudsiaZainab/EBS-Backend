@@ -4,12 +4,17 @@ import nodemailer from 'nodemailer';
 
 // Controller for creating an event
 const createEvent = async (req, res) => {
-  // Image file is handled by multer middleware before reaching this point
-  const { title, description, location, date,  capacity } = req.body;
+  // Check if required fields are provided
+  const { title, description, location, date, capacity } = req.body;
 
-  // Check if image exists 
+  if (!title || !description || !location || !date || !capacity) {
+    return res.status(400).json({ message: 'All fields are required.' });
+  }
+
+  // Check if image exists (handled by multer middleware)
   const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
+  // Create a new event object
   try {
     const event = new Event({
       title,
@@ -17,16 +22,23 @@ const createEvent = async (req, res) => {
       location,
       date,
       capacity,
-      image: imageUrl, 
+      image: imageUrl, // Image URL if uploaded, otherwise null
     });
 
     // Save event to the database
     await event.save();
+
+    // Respond with success
     res.status(201).json({ message: 'Event created successfully', event });
   } catch (err) {
+    // Log the error for debugging
+    console.error(err);
+
+    // Return a server error response
     res.status(500).json({ message: 'Error creating event', error: err.message });
   }
 };
+
 
 
   
