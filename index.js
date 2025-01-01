@@ -13,8 +13,9 @@ const port = 4000
 // middleware
 app.use(express.json());
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', // Allow only your frontend
-    credentials: true,              // Allow cookies if required
+    origin: 'http://127.0.0.1:5500', // Frontend origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    credentials: true, // Allow cookies if needed
   }));
 app.use('/uploads', express.static('uploads'));
 
