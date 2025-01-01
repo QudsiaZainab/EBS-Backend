@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import { connectDB } from '../config/db.js'; // Adjust path if needed
+import { connectDB } from './config/db.js';
 import 'dotenv/config';
-import authRouter from '../routes/authRoutes.js';
-import eventRouter from '../routes/eventRoutes.js';
+import authRouter from './routes/authRoutes.js';
+import eventRouter from './routes/eventRoutes.js';
 
 const app = express();
 
