@@ -13,7 +13,7 @@ const port = 4000
 // middleware
 app.use(express.json());
 app.use(cors({
-    origin: "*", 
+    origin: "https://ebs-4rqt.onrender.com",
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   }));
