@@ -2,7 +2,6 @@ import Event from '../models/Event.js';
 import User from '../models/User.js';
 import nodemailer from 'nodemailer';
 import cloudinary from '../middleware/cloudinaryConfig.js';
-import { io } from '../index.js';
 
 const createEvent = async (req, res) => {
   // Check if required fields are provided
@@ -122,9 +121,6 @@ const bookSeat = async (req, res) => {
       user.bookedEvents.push(eventId);
       await user.save();
 
-      // Emit event update to all clients
-      io.emit('seatBooked', { eventId, bookedSeats: event.bookedSeats });
-
       // Prepare email
       const transporter = nodemailer.createTransport({
           service: 'gmail', 
@@ -140,7 +136,7 @@ const bookSeat = async (req, res) => {
           from: process.env.EMAIL,
           to: user.email,
           subject: `Seat Booked Successfully for ${event.title}`,
-          text: `Hello ${user.username},\n\nYour seat for the event "${event.title}" has been successfully booked.\n\nEvent Details:\nDate: ${event.date}\nLocation: ${event.location}\n\nThank you for booking with us!\n\nBest regards,\nEvent Booking Team`,
+          text: `Hello ${user.username},\n\nYour seat for the event "${event.title}" has been successfully booked.\n\nEvent Details:\nDate: ${event.date}\nTime: ${event.time}\nLocation: ${event.location}\n\nThank you for booking with us!\n\nBest regards,\nEvent Booking Team`,
       };
 
       // Send email
