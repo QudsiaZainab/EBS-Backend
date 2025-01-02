@@ -8,7 +8,7 @@ const eventSchema = new mongoose.Schema({
   capacity: { type: Number, required: true },
   bookedSeats: { type: Number, default: 0 },
   bookedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Users who booked this event
-  image: { type: String },
+  image: { type: String, required: true },
 });
 
 

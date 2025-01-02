@@ -6,7 +6,7 @@ import { authenticateToken } from '../middleware/auth.js';
 const eventRouter = express.Router();
 
 // Route for creating an event
-eventRouter.post('/create', upload.single('image'), createEvent);
+eventRouter.post('/create', upload.single('image'), createEvent); 
 
 // Route for booking a seat
 eventRouter.post('/:eventId/book', authenticateToken, bookSeat);

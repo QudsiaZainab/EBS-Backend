@@ -1,8 +1,8 @@
 import Event from '../models/Event.js';
 import User from '../models/User.js';
 import nodemailer from 'nodemailer';
+import cloudinary from '../middleware/cloudinaryConfig.js';
 
-// Controller for creating an event
 const createEvent = async (req, res) => {
   // Check if required fields are provided
   const { title, description, location, date, capacity } = req.body;
@@ -12,17 +12,22 @@ const createEvent = async (req, res) => {
   }
 
   // Check if image exists (handled by multer middleware)
-  const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+  if (!req.file) {
+    return res.status(400).json({ message: 'Image is required.' });
+  }
 
-  // Create a new event object
   try {
+    // Upload image to Cloudinary
+    const result = await cloudinary.uploader.upload(req.file.path);
+
+    // Create a new event object
     const event = new Event({
       title,
       description,
       location,
       date,
       capacity,
-      image: imageUrl, // Image URL if uploaded, otherwise null
+      image: result.secure_url, // Cloudinary URL
     });
 
     // Save event to the database
@@ -32,12 +37,14 @@ const createEvent = async (req, res) => {
     res.status(201).json({ message: 'Event created successfully', event });
   } catch (err) {
     // Log the error for debugging
-    console.error(err);
+    console.error('Error creating event:', err);
 
-    // Return a server error response
-    res.status(500).json({ message: 'Error creating event', error: err.message });
+    // Return a server error response with more details
+    res.status(500).json({ message: 'Error creating event', error: err.message || 'Unknown error' });
   }
 };
+
+
 
 
 
