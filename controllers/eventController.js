@@ -2,7 +2,7 @@ import Event from '../models/Event.js';
 import User from '../models/User.js';
 import nodemailer from 'nodemailer';
 import cloudinary from '../middleware/cloudinaryConfig.js';
-import { io } from '../index.js';
+// import { io } from '../index.js';
 
 const createEvent = async (req, res) => {
   // Check if required fields are provided
@@ -123,10 +123,10 @@ const bookSeat = async (req, res) => {
       await user.save();
 
       // Emit WebSocket update for seat booking
-io.emit('updateSeats', {
-  eventId,
-  bookedSeats: event.bookedSeats
-});
+// io.emit('updateSeats', {
+//   eventId,
+//   bookedSeats: event.bookedSeats
+// });
 
       // Prepare email
       const transporter = nodemailer.createTransport({
