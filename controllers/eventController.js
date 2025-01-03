@@ -136,7 +136,7 @@ const bookSeat = async (req, res) => {
           from: process.env.EMAIL,
           to: user.email,
           subject: `Seat Booked Successfully for ${event.title}`,
-          text: `Hello ${user.username},\n\nYour seat for the event "${event.title}" has been successfully booked.\n\nEvent Details:\nDate: ${event.date}\nTime: ${event.time}\nLocation: ${event.location}\n\nThank you for booking with us!\n\nBest regards,\nEvent Booking Team`,
+          text: `Hello ${user.username},\n\nYour seat for the event "${event.title}" has been successfully booked.\n\nEvent Details:\nDate: ${event.date}\nLocation: ${event.location}\n\nThank you for booking with us!\n\nBest regards,\nEvent Booking Team`,
       };
 
       // Send email
