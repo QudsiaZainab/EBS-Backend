@@ -10,13 +10,7 @@ import { Server } from 'socket.io';
 
 // app config
 const app = express()
-const server = http.createServer(app);
-const io = new Server(server, {
-    cors: {
-        origin: "https://ebs-4rqt.onrender.com",
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
-    }
-});
+
 const port = 4000
 
 // middleware
@@ -27,6 +21,13 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
   }));
 
+  const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "https://ebs-4rqt.onrender.com",
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
+    }
+});
 
 //db connection
 connectDB();
