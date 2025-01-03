@@ -1,4 +1,4 @@
-# Event Management Systeem (Backend)
+# Event Booking Systeem (Backend)
 
 In this project there are six apis:
 
