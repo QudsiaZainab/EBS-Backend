@@ -13,7 +13,7 @@ In this project there are six apis:
 With this api, event is created in database. I just used it from postman. Images are stored in cloudinary.
 
 ## Book Event
-With this api, seat is booked for specific user. JWT is used to authenticate logged in user. After booking, confirmation email is sent to user and bookedSeats is updated in database.
+This API allows a specific user to book a seat for an event. A JWT token is used to authenticate the logged-in user. Upon successful booking, a confirmation email is sent to the user, and the bookedSeats count is updated in the database. Pusher is integrated to provide real-time updates of the booked seats on the frontend.
 
 ## Display Upcoming Events
 With this api, all upcoming events are displayed in ascending order.
