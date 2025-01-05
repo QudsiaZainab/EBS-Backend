@@ -2,7 +2,7 @@ import Event from '../models/Event.js';
 import User from '../models/User.js';
 import nodemailer from 'nodemailer';
 import cloudinary from '../config/cloudinaryConfig.js';
-import { pusher } from '../index.js';
+import { pusher } from '../config/pusherConfig.js';
 // import { io } from '../index.js';
 
 const createEvent = async (req, res) => {
