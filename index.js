@@ -4,7 +4,7 @@ import { connectDB } from './config/db.js';
 import 'dotenv/config'
 import authRouter from './routes/authRoutes.js';
 import eventRouter from './routes/eventRoutes.js';
-// import Pusher from 'pusher';
+import Pusher from 'pusher';
 // import http from 'http';
 // import { Server } from 'socket.io';
 
@@ -54,13 +54,13 @@ app.use('/api/events', eventRouter);
 // // Export io for direct access in other files
 // export { io };
 
-// const pusher = new Pusher({
-//     appId: process.env.PUSHER_APP_ID,
-//     key: process.env.PUSHER_KEY,
-//     secret: process.env.PUSHER_SECRET,
-//     cluster: process.env.PUSHER_CLUSTER,
-//     useTLS: true
-// });
+const pusher = new Pusher({
+    appId: process.env.PUSHER_APP_ID,
+    key: process.env.PUSHER_KEY,
+    secret: process.env.PUSHER_SECRET,
+    cluster: process.env.PUSHER_CLUSTER,
+    useTLS: true
+});
 
 app.get("/", (req,res)=>{
     res.send("API Working")
@@ -70,4 +70,4 @@ app.listen(port,()=>{
     console.log(`Server Started on http://localhost:${port}`);
 })
 
-// export { pusher };
+export { pusher };

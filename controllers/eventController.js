@@ -1,8 +1,8 @@
 import Event from '../models/Event.js';
 import User from '../models/User.js';
 import nodemailer from 'nodemailer';
-import cloudinary from '../middleware/cloudinaryConfig.js';
-// import { pusher } from '../index.js';
+import cloudinary from '../config/cloudinaryConfig.js';
+import { pusher } from '../index.js';
 // import { io } from '../index.js';
 
 const createEvent = async (req, res) => {
@@ -130,10 +130,10 @@ const bookSeat = async (req, res) => {
     // });
 
     // Emit seat update using Pusher
-    // pusher.trigger('event-booking', 'seatBooked', {
-    //   eventId,
-    //   bookedSeats: event.bookedSeats
-    // });
+    pusher.trigger('event-booking', 'seatBooked', {
+      eventId,
+      bookedSeats: event.bookedSeats
+    });
 
     // Prepare email
     const transporter = nodemailer.createTransport({
